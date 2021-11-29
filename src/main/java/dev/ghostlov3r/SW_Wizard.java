@@ -24,13 +24,16 @@ public class SW_Wizard extends Wizard<GameMap, MapTeam> {
 		if (team.locations().size() != 0) {
 			return true;
 		}
-		gamer.sendMessage("Подлетите на место клетки команды " + this.nameOfNewTeam() + " и кликните по воздуху");
-		gamer.onUse = () -> {
-			team.locations().add(WeakLocation.from(gamer));
+		gamer.sendMessage("Подлетите на место клетки команды " + this.nameOfNewTeam() + " и выберите 9 слот");
+		onSlotSelect(8, () -> {
+			WeakLocation location = WeakLocation.from(gamer);
+			if (map.teams.size() != 0) {
+				location.y = map.teams.get(0).locations().get(0).y;
+			}
+			team.locations().add(location);
 			gamer.sendMessage("Отлично, точка отмечена");
-			gamer.onUse = null;
 			continueCreateTeam(team);
-		};
+		});
 		return false;
 	}
 

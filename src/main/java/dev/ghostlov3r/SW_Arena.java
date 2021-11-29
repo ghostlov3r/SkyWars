@@ -1,6 +1,7 @@
 package dev.ghostlov3r;
 
 import dev.ghostlov3r.beengine.block.Blocks;
+import dev.ghostlov3r.beengine.event.entity.EntityDamageEvent;
 import dev.ghostlov3r.beengine.scheduler.Scheduler;
 import dev.ghostlov3r.beengine.scheduler.Task;
 import dev.ghostlov3r.beengine.world.SimpleChunkManager;
@@ -18,6 +19,7 @@ import dev.ghostlov3r.minigame.data.ArenaType;
 public class SW_Arena extends Arena<Team<SW_Arena, SW_Gamer>, SW_Gamer> {
 
 	CageMaker cageMaker;
+	int fallDamageProtection;
 
 	public SW_Arena(MiniGame manager, ArenaType type, int id) {
 		super(manager, type, id);
@@ -56,6 +58,7 @@ public class SW_Arena extends Arena<Team<SW_Arena, SW_Gamer>, SW_Gamer> {
 	// Убираем клетки слоями, чтобы не заспамить бедные клиенты
 	@Override
 	protected void onGameStart() {
+		fallDamageProtection = 10;
 		cageMaker.world = gameWorld();
 		cageMaker.block = Blocks.AIR();
 		Scheduler.delayedRepeat(1, 2, new Task() {
@@ -87,6 +90,22 @@ public class SW_Arena extends Arena<Team<SW_Arena, SW_Gamer>, SW_Gamer> {
 				}
 			}
 		});
+	}
+
+	@Override
+	protected void onGameTick(int second) {
+		--fallDamageProtection;
+	}
+
+	@Override
+	protected void onDamage0(EntityDamageEvent event) {
+		if (event.entity() instanceof SW_Gamer
+				&& event.cause() == EntityDamageEvent.Cause.FALL
+				&& fallDamageProtection >= 0) {
+			event.cancel();
+			return;
+		}
+		super.onDamage0(event);
 	}
 
 	@Override
