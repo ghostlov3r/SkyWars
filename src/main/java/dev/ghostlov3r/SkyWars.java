@@ -13,6 +13,7 @@ public class SkyWars extends AbstractPlugin<Config> implements EventListener<SW_
 				.arenaType(SW_Arena.class)
 				.gamerType(SW_Gamer.class)
 				.wizardType(SW_Wizard.class)
+				.mapType(SW_GameMap.class)
 				.build();
 	}
 }

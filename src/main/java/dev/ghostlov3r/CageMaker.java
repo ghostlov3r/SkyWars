@@ -51,6 +51,4 @@ public class CageMaker {
 			}
 		}
 	}
-
-	// block = (Block) Utils.invoke(Blocks.class, strings[0].toUpperCase() + "_STAINED_GLASS");
 }

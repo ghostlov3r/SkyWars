@@ -49,7 +49,7 @@ public class SW_Arena extends Arena<Team<SW_Arena, SW_Gamer>, SW_Gamer> {
 				}
 			});
 			cageMaker.world = manager;
-			cageMaker.block = Blocks.GRAY_STAINED_GLASS();
+			cageMaker.block = ((SW_GameMap)map()).cageBlock;
 			cageMaker.doFull();
 			return world;
 		};

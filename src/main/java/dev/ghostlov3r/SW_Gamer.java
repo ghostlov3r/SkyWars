@@ -1,18 +1,22 @@
 package dev.ghostlov3r;
 
+import dev.ghostlov3r.beengine.block.BlockIds;
 import dev.ghostlov3r.beengine.block.Blocks;
 import dev.ghostlov3r.beengine.block.blocks.BlockSponge;
 import dev.ghostlov3r.beengine.block.blocks.BlockTNT;
 import dev.ghostlov3r.beengine.entity.effect.EffectInstance;
 import dev.ghostlov3r.beengine.entity.effect.Effects;
 import dev.ghostlov3r.beengine.event.block.BlockBreakEvent;
+import dev.ghostlov3r.beengine.event.block.BlockPlaceEvent;
 import dev.ghostlov3r.beengine.item.*;
 import dev.ghostlov3r.beengine.player.PlayerInfo;
+import dev.ghostlov3r.beengine.scheduler.Scheduler;
 import dev.ghostlov3r.beengine.world.Particle;
 import dev.ghostlov3r.beengine.world.Sound;
 import dev.ghostlov3r.math.FRand;
 import dev.ghostlov3r.minecraft.MinecraftSession;
 import dev.ghostlov3r.minigame.MGGamer;
+import dev.ghostlov3r.minigame.arena.ArenaState;
 import dev.ghostlov3r.minigame.arena.Team;
 import dev.ghostlov3r.nbt.NbtMap;
 
@@ -35,7 +39,7 @@ public class SW_Gamer extends MGGamer<SW_Arena, Team<SW_Arena, SW_Gamer>> {
 				Чтобы победить в матче, скидывай противников в небытие. Если скинут или поразят тебя, ты проиграешь.
 				Победит игрок или команда, которая последней окажется в живых.
 
-				Совет 1: преимущество имеет тот, кто выше. Но помни, что у противника может быть лук, и он тебя скинет.
+				Совет 1: преимущество имеет тот, кто выше. Но помни, что у противника может быть лук.
 				Совет 2: чтобы подобраться к противнику, построй мост между островами, но не забудь про страховку.
 				Совет 3: если противнику досталась мощная экипировка, а тебя ничего нет, попробуй применить хитрость.""";
 	}
@@ -111,7 +115,7 @@ public class SW_Gamer extends MGGamer<SW_Arena, Team<SW_Arena, SW_Gamer>> {
 				lucky = true;
 				Item item = randomLoot.get(FRand.random().nextInt(randomLoot.size()));
 				if (item.id() == ItemIds.TNT || item.id() == ItemIds.ENDER_PEARL) {
-					item.setCount(FRand.nextInt(1, 2));
+					item.setCount(1);
 				} else {
 					item.setCount(FRand.random().nextInt(item.maxStackSize() + 1));
 				}
@@ -125,9 +129,22 @@ public class SW_Gamer extends MGGamer<SW_Arena, Team<SW_Arena, SW_Gamer>> {
 			if (FRand.random().nextInt(200) == 1) {
 				world.setBlock(event.block(), Blocks.TNT());
 				if (world.getBlock(event.block()) instanceof BlockTNT tnt) {
-					tnt.ignite(40);
+					tnt.ignite(55);
 				}
 			}
+		}
+	}
+
+	@Override
+	public void onBlockPlace(BlockPlaceEvent<MGGamer> event) {
+		if (event.block().id() == BlockIds.TNT) {
+			Scheduler.delay(1, () -> {
+				if (arenaState() == ArenaState.GAME) {
+					if (world.getBlock(event.block()) instanceof BlockTNT tnt) {
+						tnt.ignite(40);
+					}
+				}
+			});
 		}
 	}
 }
