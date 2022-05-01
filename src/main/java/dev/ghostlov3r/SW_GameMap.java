@@ -1,11 +1,11 @@
 package dev.ghostlov3r;
 
+import beengine.block.Block;
+import beengine.block.Blocks;
+import beengine.util.DiskMap;
+import beengine.util.Utils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.ghostlov3r.beengine.block.Block;
-import dev.ghostlov3r.beengine.block.Blocks;
-import dev.ghostlov3r.beengine.utils.DiskMap;
-import dev.ghostlov3r.common.Utils;
 import dev.ghostlov3r.minigame.data.GameMap;
 import dev.ghostlov3r.minigame.data.MapTeam;
 

@@ -1,24 +1,24 @@
 package dev.ghostlov3r;
 
-import dev.ghostlov3r.beengine.block.BlockIds;
-import dev.ghostlov3r.beengine.block.Blocks;
-import dev.ghostlov3r.beengine.block.blocks.BlockSponge;
-import dev.ghostlov3r.beengine.block.blocks.BlockTNT;
-import dev.ghostlov3r.beengine.entity.effect.EffectInstance;
-import dev.ghostlov3r.beengine.entity.effect.Effects;
-import dev.ghostlov3r.beengine.event.block.BlockBreakEvent;
-import dev.ghostlov3r.beengine.event.block.BlockPlaceEvent;
-import dev.ghostlov3r.beengine.item.*;
-import dev.ghostlov3r.beengine.player.PlayerInfo;
-import dev.ghostlov3r.beengine.scheduler.Scheduler;
-import dev.ghostlov3r.beengine.world.Particle;
-import dev.ghostlov3r.beengine.world.Sound;
-import dev.ghostlov3r.math.FRand;
-import dev.ghostlov3r.minecraft.MinecraftSession;
+import beengine.block.BlockIds;
+import beengine.block.Blocks;
+import beengine.block.blocks.BlockSponge;
+import beengine.block.blocks.BlockTNT;
+import beengine.entity.effect.EffectInstance;
+import beengine.entity.effect.Effects;
+import beengine.event.block.BlockBreakEvent;
+import beengine.event.block.BlockPlaceEvent;
+import beengine.item.*;
+import beengine.minecraft.MinecraftSession;
+import beengine.nbt.NbtMap;
+import beengine.player.PlayerInfo;
+import beengine.scheduler.Scheduler;
+import beengine.util.math.FRand;
+import beengine.world.Particle;
+import beengine.world.Sound;
 import dev.ghostlov3r.minigame.MGGamer;
 import dev.ghostlov3r.minigame.arena.ArenaState;
 import dev.ghostlov3r.minigame.arena.Team;
-import dev.ghostlov3r.nbt.NbtMap;
 
 import java.util.List;
 

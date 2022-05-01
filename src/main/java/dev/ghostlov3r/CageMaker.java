@@ -1,8 +1,9 @@
 package dev.ghostlov3r;
 
-import dev.ghostlov3r.beengine.block.Block;
-import dev.ghostlov3r.beengine.world.ChunkManager;
-import dev.ghostlov3r.math.Vector3;
+
+import beengine.block.Block;
+import beengine.util.math.Vector3;
+import beengine.world.ChunkManager;
 
 import java.util.ArrayList;
 import java.util.List;

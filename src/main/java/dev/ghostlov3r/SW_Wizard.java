@@ -1,12 +1,13 @@
 package dev.ghostlov3r;
 
-import dev.ghostlov3r.beengine.Server;
-import dev.ghostlov3r.beengine.block.Blocks;
-import dev.ghostlov3r.beengine.scheduler.AsyncTask;
-import dev.ghostlov3r.beengine.world.World;
-import dev.ghostlov3r.beengine.world.format.BlockArray;
-import dev.ghostlov3r.beengine.world.format.ChunkSection;
-import dev.ghostlov3r.beengine.world.format.io.WorldProvider;
+import beengine.Server;
+import beengine.block.Blocks;
+import beengine.block.blocks.BlockChest;
+import beengine.scheduler.AsyncTask;
+import beengine.util.math.Facing;
+import beengine.world.World;
+import beengine.world.format.ChunkSection;
+import beengine.world.format.io.WorldProvider;
 import dev.ghostlov3r.minigame.MGGamer;
 import dev.ghostlov3r.minigame.Wizard;
 import dev.ghostlov3r.minigame.data.GameMap;
@@ -46,13 +47,18 @@ public class SW_Wizard extends Wizard<GameMap, MapTeam> {
 				WorldProvider provider = WorldProvider.open(World.pathByName(map.worldName));
 				provider.forEachChunk(ctx -> {
 					for (ChunkSection section : ctx.chunk().sections()) {
-						for (BlockArray layer : section.blockLayers()) {
-							layer.replaceAll(Blocks.CHEST().fullId(), Blocks.SPONGE().fullId());
+						if (!section.isEmptyFast()) {
+							for (beengine.world.format.PalettedBlockStorage layer : section.blockLayers()) {
+								BlockChest block = Blocks.CHEST();
+								for (Facing face : Facing.HORIZONTALS) {
+									block.setFacing(face);
+									layer.palette().replaceAll(id -> id == block.fullId() ? Blocks.SPONGE().fullId() : id);
+								}
+							}
+							section.setDirty(true);
 						}
 					}
-					if (ctx.chunk().isDirty()) {
-						provider.writeChunk(ctx);
-					}
+					provider.writeChunk(ctx);
 				});
 				WorldProvider.close(World.pathByName(map.worldName));
 			}

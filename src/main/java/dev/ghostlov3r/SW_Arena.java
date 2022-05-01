@@ -1,14 +1,14 @@
 package dev.ghostlov3r;
 
-import dev.ghostlov3r.beengine.block.Blocks;
-import dev.ghostlov3r.beengine.event.entity.EntityDamageEvent;
-import dev.ghostlov3r.beengine.scheduler.Scheduler;
-import dev.ghostlov3r.beengine.scheduler.Task;
-import dev.ghostlov3r.beengine.world.SimpleChunkManager;
-import dev.ghostlov3r.beengine.world.Sound;
-import dev.ghostlov3r.beengine.world.World;
-import dev.ghostlov3r.math.FMath;
-import dev.ghostlov3r.minecraft.protocol.v113.packet.WorldSoundEvent;
+import beengine.block.Blocks;
+import beengine.event.entity.EntityDamageEvent;
+import beengine.minecraft.protocol.v113.packet.WorldSoundEvent;
+import beengine.scheduler.Scheduler;
+import beengine.scheduler.Task;
+import beengine.util.math.FMath;
+import beengine.world.SimpleChunkManager;
+import beengine.world.Sound;
+import beengine.world.World;
 import dev.ghostlov3r.minigame.MiniGame;
 import dev.ghostlov3r.minigame.arena.Arena;
 import dev.ghostlov3r.minigame.arena.ArenaState;

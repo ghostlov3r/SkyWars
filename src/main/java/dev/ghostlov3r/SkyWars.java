@@ -1,11 +1,10 @@
 package dev.ghostlov3r;
 
-import dev.ghostlov3r.beengine.event.EventListener;
-import dev.ghostlov3r.beengine.plugin.AbstractPlugin;
-import dev.ghostlov3r.beengine.utils.config.Config;
+import beengine.plugin.AbstractPlugin;
+import beengine.util.config.Config;
 import dev.ghostlov3r.minigame.MiniGame;
 
-public class SkyWars extends AbstractPlugin<Config> implements EventListener<SW_Gamer> {
+public class SkyWars extends AbstractPlugin<Config> {
 
 	@Override
 	protected void onEnable() {
